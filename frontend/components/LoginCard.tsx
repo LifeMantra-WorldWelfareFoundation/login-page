@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 import { Provider } from '../types';
 import ProviderButton from './ProviderButton';
-import { GoogleIcon } from './icons/GoogleIcon';
-import { FacebookIcon } from './icons/FacebookIcon';
-import { XIcon } from './icons/XIcon';
-import { TikTokIcon } from './icons/TikTokIcon';
-import { DiscordIcon } from './icons/DiscordIcon';
 
 const LoginCard: React.FC = () => {
   const [email, setEmail] = useState('');
