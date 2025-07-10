@@ -1,26 +1,39 @@
-
-import React from 'react';
-import { Provider } from '../types';
-import ProviderButton from './ProviderButton';
-import { GoogleIcon } from './icons/GoogleIcon';
-import { FacebookIcon } from './icons/FacebookIcon';
-import { XIcon } from './icons/XIcon';
-import { TikTokIcon } from './icons/TikTokIcon';
-import { DiscordIcon } from './icons/DiscordIcon';
+import React from "react";
+import { Provider } from "../types";
+import { supabase } from "../supabaseClient";
+import ProviderButton from "./ProviderButton";
+import { GoogleIcon } from "./icons/GoogleIcon";
+import { FacebookIcon } from "./icons/FacebookIcon";
+import { XIcon } from "./icons/XIcon";
+import { TikTokIcon } from "./icons/TikTokIcon";
+import { DiscordIcon } from "./icons/DiscordIcon";
 
 const LoginCard: React.FC = () => {
-  const handleLogin = (provider: Provider) => {
-    // In a real application, this would initiate the OAuth flow.
-    console.log(`Attempting to log in with ${provider}`);
+  const handleLogin = async (provider: Provider) => {
+    if (provider === Provider.Google) {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: "http://localhost:3000", // Next backend origin
+        },
+      });
+      if (error) console.error(error);
+    } else {
+      console.log(`Attempting to log in with ${provider}`);
+    }
   };
 
   return (
     <div className="bg-white w-full max-w-md p-8 md:p-10 rounded-2xl shadow-xl space-y-8 animate-fade-in">
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Create an account</h1>
-        <p className="mt-2 text-gray-600">Choose your preferred provider to continue.</p>
+        <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
+          Create an account
+        </h1>
+        <p className="mt-2 text-gray-600">
+          Choose your preferred provider to continue.
+        </p>
       </div>
-      
+
       <div className="space-y-4">
         <ProviderButton
           provider={Provider.Google}
@@ -30,7 +43,7 @@ const LoginCard: React.FC = () => {
         >
           Continue with Google
         </ProviderButton>
-        
+
         <ProviderButton
           provider={Provider.Facebook}
           onClick={() => handleLogin(Provider.Facebook)}
@@ -69,7 +82,21 @@ const LoginCard: React.FC = () => {
       </div>
 
       <p className="text-center text-xs text-gray-500 pt-4">
-        By continuing, you agree to our <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">Terms of Service</a> and <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">Privacy Policy</a>.
+        By continuing, you agree to our{" "}
+        <a
+          href="#"
+          className="font-medium text-indigo-600 hover:text-indigo-500"
+        >
+          Terms of Service
+        </a>{" "}
+        and{" "}
+        <a
+          href="#"
+          className="font-medium text-indigo-600 hover:text-indigo-500"
+        >
+          Privacy Policy
+        </a>
+        .
       </p>
     </div>
   );
