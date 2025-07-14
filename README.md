@@ -1,2 +1,11 @@
+cd backend
+npm install
+npm run dev
+
+NEW TERMINAL
+cd frontend
+npm install
+npm run dev
+
 Must run 'npm run dev' in both backend and frontend
-Make sure you have .env locally as it will be ignored in git
+Ensure you have .env locally
