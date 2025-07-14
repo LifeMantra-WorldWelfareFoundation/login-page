@@ -32,6 +32,23 @@ const LoginCard: React.FC = () => {
     }
   };
 
+  const handleRegister = async () => {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: window.location.origin + "/confirm"
+    }
+  });
+
+  if (error) {
+    setError(error.message);
+  } else {
+    alert('Check your email to confirm your registration!');
+  }
+};
+
+
   return (
     <div className="bg-white w-full max-w-md p-8 md:p-10 rounded-2xl shadow-xl space-y-8 animate-fade-in">
       <div className="text-center">
