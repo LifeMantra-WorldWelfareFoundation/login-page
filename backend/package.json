@@ -1,17 +1,28 @@
 {
-  "name": "omniauth-backend",
-  "version": "0.0.1",
-  "private": true,
-  "type": "module",
+  "name": "liquid-glass-login-backend",
+  "version": "1.0.0",
+  "description": "Backend for liquid glass login app",
+  "main": "server.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "dependencies": {
-    "next": "^14.2.30",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@supabase/ssr": "^0.6.1"
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-facebook": "^3.0.0",
+    "passport-twitter": "^1.0.4",
+    "passport-snapchat": "^1.0.0",
+    "passport-discord": "^0.1.4",
+    "@supabase/supabase-js": "^2.39.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
   }
 }

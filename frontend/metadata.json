@@ -1,6 +1,0 @@
-{
-  "name": "OmniAuth Login",
-  "description": "A modern, sleek login page that provides authentication options via Google, Facebook, X, TikTok, and Discord. Designed with a clean and minimal UI for a seamless user experience.",
-  "requestFramePermissions": [],
-  "prompt": ""
-}
