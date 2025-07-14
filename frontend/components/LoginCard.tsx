@@ -12,17 +12,28 @@ const LoginCard: React.FC = () => {
   const [email, setEmail] = useState("");
 
   const handleLogin = async (provider: Provider) => {
-    if (provider === Provider.Google) {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-          redirectTo: "http://localhost:3000/login", // backend callback route
-        },
-      });
-      if (error) console.error(error);
-    } else {
-      console.log(`Attempting to log in with ${provider}`);
+    const providerMap: Record<Provider, string | null> = {
+      [Provider.Google]: "google",
+      [Provider.Facebook]: "facebook",
+      [Provider.Discord]: "discord",
+      [Provider.X]: "twitter", // Supabase uses "twitter" for X
+      [Provider.TikTok]: null, // TikTok not supported by Supabase (yet)
+    };
+
+    const supaProvider = providerMap[provider];
+    if (!supaProvider) {
+      console.log(`${provider} is not supported by Supabase OAuth`);
+      return;
     }
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: supaProvider as any,
+      options: {
+        redirectTo: "http://localhost:3000/login", // backend callback route
+      },
+    });
+
+    if (error) console.error(error);
   };
 
   const handleEmailSignup = (e: React.FormEvent) => {
