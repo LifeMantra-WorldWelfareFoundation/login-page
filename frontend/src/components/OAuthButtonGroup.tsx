@@ -1,13 +1,13 @@
 import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import { FaFacebook, FaSnapchat, FaDiscord } from 'react-icons/fa';
+import { FaFacebook, FaSnapchatGhost, FaDiscord } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 
 const oAuthProviders = [
   { name: 'Google', icon: <FcGoogle className="h-6 w-6" /> },
   { name: 'Facebook', icon: <FaFacebook className="h-6 w-6 text-[#1877F2]" /> },
   { name: 'Twitter', icon: <FaXTwitter className="h-6 w-6" /> },
-  { name: 'Snapchat', icon: <FaSnapchat className="h-6 w-6 text-[#FFFC00]" /> },
+  { name: 'Snapchat', icon: <FaSnapchatGhost className="h-6 w-6 text-[#FFFC00]" /> },
   { name: 'Discord', icon: <FaDiscord className="h-6 w-6 text-[#5865F2]" /> },
 ];
 
