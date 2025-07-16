@@ -56,8 +56,12 @@ app.use(passport.session());
 require('./config/passport-setup');
 
 // Routes
-const authRoutes = require('./routes/auth-routes');
+const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
+
+const socialAuthRoutes = require('./routes/auth-routes');
+app.use('/auth/social', socialAuthRoutes);
+
 
 // Health check route
 app.get('/', (req, res) => {

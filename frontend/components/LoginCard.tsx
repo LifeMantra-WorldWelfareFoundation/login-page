@@ -10,6 +10,8 @@ import { DiscordIcon } from "./icons/DiscordIcon";
 
 const LoginCard: React.FC = () => {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState('');
+  const [fullName, setFullName] = useState('');
 
   const handleLogin = async (provider: Provider) => {
     if (provider === Provider.Google) {
@@ -25,19 +27,18 @@ const LoginCard: React.FC = () => {
     }
   };
 
-  const handleEmailSignup = (e: React.FormEvent) => {
+  const handleEmailSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      console.log(`Attempting to sign up with email: ${email}`);
-    }
+    await handleRegister();  // call the real sign-up logic
   };
+
 
   const handleRegister = async () => {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
-      emailRedirectTo: window.location.origin + "/confirm"
+      emailRedirectTo: "http://localhost:5173/profile", 
     }
   });
 
@@ -122,19 +123,36 @@ const LoginCard: React.FC = () => {
         <div>
           <input
             type="email"
+            placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email address"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
-            required
+            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 margin-bottom:10px;"
+
           />
+          
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+          
+
         </div>
 
         <button
           type="submit"
           className="w-full flex items-center justify-center p-3 rounded-lg font-semibold text-base transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-indigo-600 text-white hover:bg-indigo-700"
         >
-          Continue with Email
+          Sign up with Email
         </button>
       </form>
 

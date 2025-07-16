@@ -26,11 +26,17 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onToggleView, onOAuthLogin, onS
   }
 
   const res = await fetch('http://localhost:8080/auth/signup', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
-    body: JSON.stringify({ email, password }),
-  });
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  credentials: 'include',
+  body: JSON.stringify({
+    email,
+    password,
+    fullName,
+    redirectTo: 'http://localhost:3000/confirm' 
+  }),
+});
+
 
   if (res.ok) {
     alert('Check your email to confirm your registration.');
